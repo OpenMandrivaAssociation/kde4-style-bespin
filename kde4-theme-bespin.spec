@@ -27,20 +27,6 @@ Bespin is a native style for QT/ KDE4
 The name is nothing about Quantum Mechanics, but just refers to the Cloud City
 from StarWars - Episode V "The Empire Strikes Back"
 
-%prep
-%setup -q -n %{srcname}
-
-%build
-%cmake_kde4
-%make
-
-%install
-rm -rf %{buildroot}
-cd build
-%makeinstall_std
-
-%clean 
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -55,3 +41,19 @@ rm -rf %{buildroot}
 %{_kde_appsdir}/kstyle/themes/bespin.themerc
 %{_kde_datadir}/kde4/services/plasma-applet-xbar.desktop
 
+#--------------------------------------------------------------------
+
+%prep
+%setup -q -n %{srcname}
+
+%build
+%cmake_kde4
+%make
+
+%install
+rm -rf %{buildroot}
+cd build
+%makeinstall_std
+
+%clean 
+rm -rf %{buildroot}
