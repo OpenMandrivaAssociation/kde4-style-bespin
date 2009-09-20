@@ -3,13 +3,13 @@
 # tar cf cloudcity-0.1.386svn.tar cloudcity
 # bzip2 cloudcity-0.1.386svn.tar
 
-%define svn	398
+%define svn	622
 %define srcname	cloudcity
 
 Name: kde4-style-bespin
 Summary: Bespin is a native style for QT/ KDE4
 Version: 0.1
-Release: %mkrel 0.%{svn}svn.2
+Release: %mkrel 0.%{svn}svn.1
 Source0: %{srcname}-%{version}.%{svn}svn.tar.bz2
 URL: http://cloudcity.sourceforge.net/
 Group: Graphical desktop/KDE
@@ -30,7 +30,7 @@ from StarWars - Episode V "The Empire Strikes Back"
 
 %files
 %defattr(-,root,root)
-%doc README
+%doc README INSTALL COPYING COPYING.LIB
 %{_kde_bindir}/bespin
 %{_kde_libdir}/qt4/plugins/styles/libbespin.so
 %{_kde_libdir}/kde4/plasma_applet_xbar.so
@@ -51,9 +51,8 @@ from StarWars - Episode V "The Empire Strikes Back"
 %make
 
 %install
-rm -rf %{buildroot}
-cd build
-%makeinstall_std
+%__rm -rf %{buildroot}
+%{makeinstall_std} -C build
 
 %clean 
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
