@@ -10,7 +10,7 @@
 Name: kde4-style-bespin
 Summary: Bespin is a native style for QT/ KDE4
 Version: 0.1
-Release: %mkrel 0.%{svn}svn.1
+Release: %mkrel 0.%{svn}svn.2
 Source0: %{srcname}-%{version}.%{svn}svn.tar.lzma
 URL: http://cloudcity.sourceforge.net/
 Group: Graphical desktop/KDE
@@ -27,7 +27,8 @@ Bespin is a native style for QT/ KDE4
 
 The name is nothing about Quantum Mechanics, but just refers to the
 Cloud City from StarWars - Episode V "The Empire Strikes Back"
-Some presets can be found in %_kde_docdir/%{name}
+
+Some presets can be found in /usr/share/doc/%{name}
 
 
 %files
