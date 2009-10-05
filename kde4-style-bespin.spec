@@ -4,7 +4,7 @@
 # tar -caf cloudcity-0.1.624svn.tar.lzma cloudcity
 
 
-%define svn	636
+%define svn	708
 %define srcname	cloudcity
 
 Name: kde4-style-bespin
