@@ -10,7 +10,7 @@
 Name: kde4-style-bespin
 Summary: Bespin is a native style for QT/ KDE4
 Version: 0.1
-Release: %mkrel 0.%{svn}svn.2
+Release: %mkrel 0.%{svn}svn.1
 Source0: %{srcname}-%{version}.%{svn}svn.tar.lzma
 URL: http://cloudcity.sourceforge.net/
 Group: Graphical desktop/KDE
