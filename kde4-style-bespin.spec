@@ -4,7 +4,7 @@
 # tar -caf cloudcity-0.1.624svn.tar.lzma cloudcity
 
 
-%define svn	708
+%define svn	983
 %define srcname	cloudcity
 
 Name: kde4-style-bespin
@@ -35,6 +35,7 @@ Some presets can be found in /usr/share/doc/%{name}
 %defattr(-,root,root)
 %doc README INSTALL COPYING COPYING.LIB presets/
 %_kde_bindir/bespin
+%_libdir/libQtBespin.so
 %_kde_libdir/qt4/plugins/styles/libbespin.so
 %_kde_libdir/kde4/kstyle_bespin_config.so
 %_kde_libdir/kde4/kwin3_bespin.so
