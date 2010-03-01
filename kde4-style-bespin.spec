@@ -4,7 +4,7 @@
 # tar -caf cloudcity-0.1.624svn.tar.lzma cloudcity
 
 
-%define svn	983
+%define svn	1031
 %define srcname	cloudcity
 
 Name: kde4-style-bespin
@@ -20,7 +20,6 @@ BuildRequires: kdebase4-workspace-devel
 Obsoletes: kde4-kwin-style-bespin < %version-%release
 Obsoletes: kde4-theme-bespin
 Suggests: plasma-applet-xbar
-#< %version-%release
 
 %description
 Bespin is a native style for QT/ KDE4
