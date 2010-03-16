@@ -1,10 +1,10 @@
 # Download information:
 # svn co https://cloudcity.svn.sourceforge.net/svnroot/cloudcity
 # cd cloudcity && find . -name .svn |xargs rm -rf && cd ..
-# tar -caf cloudcity-0.1.624svn.tar.lzma cloudcity
+# tar -caf cloudcity-0.1.1043svn.tar.lzma cloudcity
 
 
-%define svn	1031
+%define svn	1043
 %define srcname	cloudcity
 
 Name: kde4-style-bespin
@@ -17,6 +17,8 @@ Group: Graphical desktop/KDE
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License: LGPLv3+
 BuildRequires: kdebase4-workspace-devel
+# needed to generate the ksplash
+BuildRequires:	imagemagick
 Obsoletes: kde4-kwin-style-bespin < %version-%release
 Obsoletes: kde4-theme-bespin
 Suggests: plasma-applet-xbar
@@ -76,22 +78,46 @@ Bash completion for the "bespin" tool, written by Franz Fellner
 
 #--------------------------------------------------------------------
 
+%package	ksplash
+Summary:	Bespin kdm theme
+Group:		Graphical desktop/KDE
+%description	ksplash
+This package provide a bespin kdm theme
+
+%files	ksplash
+%defattr(-,root,root)
+%_kde_datadir/apps/ksplash/Themes/bespin/
+
+#--------------------------------------------------------------------
+
 %prep
 %setup -q -n %{srcname}
 
 %build
-%cmake_kde4
+%cmake_kde4 -DENABLE_ARGB=on
 %make
 
 %install
 %__rm -rf %{buildroot}
 %{makeinstall_std} -C build
 
-mkdir -p %{buildroot}/%{_sysconfdir}/bash_completion.d
-mkdir -p %{buildroot}/%_kde_mandir/man1
-cp man/bespin.1 %{buildroot}/%_kde_mandir/man1
+# Installing necessary files for bespin-completion
+%__mkdir -p %{buildroot}/%{_sysconfdir}/bash_completion.d
+%__mkdir -p %{buildroot}/%_kde_mandir/man1
+%__cp man/bespin.1 %{buildroot}/%_kde_mandir/man1
 lzma %{buildroot}/%_kde_mandir/man1/bespin.1
-cp extras/bespin-compl %{buildroot}/%{_sysconfdir}/bash_completion.d
+%__cp extras/bespin-compl %{buildroot}/%{_sysconfdir}/bash_completion.d
+
+# Installing necessary files for kdm bespin theme
+%__mkdir -p %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin
+cd ksplash
+./generate.sh 600 400
+./generate.sh 800 600
+./generate.sh 1024 768
+./generate.sh 1280 1024
+./generate.sh 1600 1200
+./generate.sh 1920 1200
+%__cp -rf  .	%{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin/
 
 %clean 
 %__rm -rf %{buildroot}
