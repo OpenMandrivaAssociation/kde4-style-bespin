@@ -7,22 +7,21 @@
 %define svn	1043
 %define srcname	cloudcity
 
-Name: kde4-style-bespin
-Summary: Bespin is a native style for QT/ KDE4
-Version: 0.1
-Release: %mkrel 0.%{svn}svn.1
-Source0: %{srcname}-%{version}.%{svn}svn.tar.lzma
-URL: http://cloudcity.sourceforge.net/
-Group: Graphical desktop/KDE
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-License: LGPLv3+
-BuildRequires: kdebase4-workspace-devel
+Name:		kde4-style-bespin
+Summary:	Bespin is a native style for QT/ KDE4
+Version:	0.1
+Release:	%mkrel 0.%{svn}svn.1
+Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
+URL:		http://cloudcity.sourceforge.net/
+Group:		Graphical desktop/KDE
+License:	LGPLv3+
+BuildRequires:	kdebase4-workspace-devel
 # needed to generate the ksplash
 BuildRequires:	imagemagick
-Obsoletes: kde4-kwin-style-bespin < %version-%release
-Obsoletes: kde4-theme-bespin
-Suggests: plasma-applet-xbar
-
+Obsoletes:	kde4-kwin-style-bespin < %version-%release
+Obsoletes:	kde4-theme-bespin
+Suggests:	plasma-applet-xbar
+Suggests:	kde4-style-bespin-ksplash
 %description
 Bespin is a native style for QT/ KDE4
 
