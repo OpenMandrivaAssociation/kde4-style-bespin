@@ -20,8 +20,10 @@ BuildRequires:	kdebase4-workspace-devel
 BuildRequires:	imagemagick
 Obsoletes:	kde4-kwin-style-bespin < %version-%release
 Obsoletes:	kde4-theme-bespin
-Suggests:	plasma-applet-xbar
 Suggests:	kde4-style-bespin-ksplash
+Suggests:	kde4-style-bespin-kdm
+Suggests:       plasma-applet-xbar
+
 %description
 Bespin is a native style for QT/ KDE4
 
@@ -35,7 +37,7 @@ Some presets can be found in /usr/share/doc/%{name}
 %defattr(-,root,root)
 %doc README INSTALL COPYING COPYING.LIB presets/
 %_kde_bindir/bespin
-%_libdir/libQtBespin.so
+%_kde_libdir/libQtBespin.so
 %_kde_libdir/qt4/plugins/styles/libbespin.so
 %_kde_libdir/kde4/kstyle_bespin_config.so
 %_kde_libdir/kde4/kwin3_bespin.so
@@ -46,7 +48,7 @@ Some presets can be found in /usr/share/doc/%{name}
 
 #---------------------------------------------------------------------
 
-%package -n plasma-applet-xbar
+%package -n 	plasma-applet-xbar
 Summary:	Xbar applet for Bespin style
 Group:		Graphical desktop/KDE
 Requires:	%{name}
@@ -64,7 +66,7 @@ The only currently existing Server is a Plasmoid.
 
 #---------------------------------------------------------------------
 
-%package -n bespin-bash-completion
+%package -n 	bespin-bash-completion
 Summary:	Bash Completion for bespin
 Group:		Development/Other
 Requires:	bash-completion
@@ -78,7 +80,7 @@ Bash completion for the "bespin" tool, written by Franz Fellner
 #--------------------------------------------------------------------
 
 %package	ksplash
-Summary:	Bespin kdm theme
+Summary:	Bespin ksplash theme
 Group:		Graphical desktop/KDE
 %description	ksplash
 This package provide a bespin kdm theme
@@ -86,6 +88,18 @@ This package provide a bespin kdm theme
 %files	ksplash
 %defattr(-,root,root)
 %_kde_datadir/apps/ksplash/Themes/bespin/
+
+#--------------------------------------------------------------------
+
+%package	kdm
+Summary:	Bespin kdm theme
+Group:		Graphical desktop/KDE
+%description	kdm
+This package provide a bespin kdm theme
+
+%files	kdm
+%defattr(-,root,root)
+%_kde_datadir/apps/kdm/themes/bespin/
 
 #--------------------------------------------------------------------
 
@@ -108,15 +122,19 @@ lzma %{buildroot}/%_kde_mandir/man1/bespin.1
 %__cp extras/bespin-compl %{buildroot}/%{_sysconfdir}/bash_completion.d
 
 # Installing necessary files for kdm bespin theme
+%__mkdir -p %{buildroot}/%_kde_datadir/apps/kdm/themes/bespin
+cp -rf kdm/* %{buildroot}/%_kde_datadir/apps/kdm/themes/bespin
+
+# Installing necessary files for ksplash bespin theme
 %__mkdir -p %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin
 cd ksplash
-./generate.sh 600 400
+./generate.sh 640 400
 ./generate.sh 800 600
 ./generate.sh 1024 768
 ./generate.sh 1280 1024
 ./generate.sh 1600 1200
 ./generate.sh 1920 1200
-%__cp -rf  .	%{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin/
+%__cp -rf . %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin/
 
 %clean 
 %__rm -rf %{buildroot}
