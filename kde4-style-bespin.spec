@@ -12,16 +12,22 @@ Summary:	Bespin is a native style for QT/ KDE4
 Version:	0.1
 Release:	%mkrel 0.%{svn}svn.1
 Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
+# Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
+# since we're providing the necessary data directly in the script
+Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
 URL:		http://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
-License:	LGPLv3+
+License:	LGPLv2
 BuildRequires:	kdebase4-workspace-devel
 # needed to generate the ksplash
 BuildRequires:	imagemagick
+# need to generate the icons pack
+BuildRequires:	inkscape
 Obsoletes:	kde4-kwin-style-bespin < %version-%release
 Obsoletes:	kde4-theme-bespin
 Suggests:	kde4-style-bespin-ksplash
 Suggests:	kde4-style-bespin-kdm
+Suggests:	kde4-style-bespin-icons
 Suggests:       plasma-applet-xbar
 
 %description
@@ -103,8 +109,21 @@ This package provide a bespin kdm theme
 
 #--------------------------------------------------------------------
 
+%package	icons
+Summary:	Bespin icons theme
+Group:		Graphical desktop/KDE
+%description	icons
+This package provide a bespin kdm theme
+
+%files	icons
+%defattr(-,root,root)
+%_kde_datadir/icons/bespin/
+
+#--------------------------------------------------------------------
+
 %prep
 %setup -q -n %{srcname}
+%patch0 -p 0
 
 %build
 %cmake_kde4 -DENABLE_ARGB=on
@@ -128,13 +147,20 @@ cp -rf kdm/* %{buildroot}/%_kde_datadir/apps/kdm/themes/bespin
 # Installing necessary files for ksplash bespin theme
 %__mkdir -p %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin
 cd ksplash
-./generate.sh 640 400
-./generate.sh 800 600
-./generate.sh 1024 768
-./generate.sh 1280 1024
+#./generate.sh 640 400
+#./generate.sh 800 600
+#./generate.sh 1024 768
+#./generate.sh 1280 1024
 ./generate.sh 1600 1200
-./generate.sh 1920 1200
+#./generate.sh 1920 1200
 %__cp -rf . %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin/
+cd ..
+# Creating the icons package
+cd icons
+./generate_kde_icons.sh
+%__mkdir -p %{buildroot}/%_kde_datadir/icons/
+%__mv bespin %{buildroot}/%_kde_datadir/icons/
+cd ..
 
 %clean 
 %__rm -rf %{buildroot}
