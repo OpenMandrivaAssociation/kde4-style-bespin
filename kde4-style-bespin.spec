@@ -10,11 +10,15 @@
 Name:		kde4-style-bespin
 Summary:	Bespin is a native style for QT/ KDE4
 Version:	0.1
-Release:	%mkrel 0.%{svn}svn.1
+Release:	%mkrel 0.%{svn}svn.2
 Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
 # Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
 # since we're providing the necessary data directly in the script
+Source1:	screenshot.png.bz2
+Source2:        Preview.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
+Patch1:		bespin-svn-mdv-fix-ksplash-themerc.patch
+Patch2:		bespin-svn-mdv-fix-ksplash-generate-script.patch
 URL:		http://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
 License:	LGPLv2
@@ -93,7 +97,7 @@ This package provide a bespin kdm theme
 
 %files	ksplash
 %defattr(-,root,root)
-%_kde_datadir/apps/ksplash/Themes/bespin/
+%_kde_datadir/apps/ksplash/Themes/Bespin/
 
 #--------------------------------------------------------------------
 
@@ -101,11 +105,11 @@ This package provide a bespin kdm theme
 Summary:	Bespin kdm theme
 Group:		Graphical desktop/KDE
 %description	kdm
-This package provide a bespin kdm theme
+This package provide a Bespin kdm theme
 
 %files	kdm
 %defattr(-,root,root)
-%_kde_datadir/apps/kdm/themes/bespin/
+%_kde_datadir/apps/kdm/themes/Bespin/
 
 #--------------------------------------------------------------------
 
@@ -113,20 +117,21 @@ This package provide a bespin kdm theme
 Summary:	Bespin icons theme
 Group:		Graphical desktop/KDE
 %description	icons
-This package provide a bespin kdm theme
+This package provide a Bespin icons theme
 
 %files	icons
 %defattr(-,root,root)
-%_kde_datadir/icons/bespin/
+%_kde_datadir/icons/Bespin/
 
 #--------------------------------------------------------------------
 
 %prep
 %setup -q -n %{srcname}
 %patch0 -p 0
-
+%patch1 -p 0
+%patch2 -p 0
 %build
-%cmake_kde4 -DENABLE_ARGB=on
+%cmake_kde4 
 %make
 
 %install
@@ -141,25 +146,29 @@ lzma %{buildroot}/%_kde_mandir/man1/bespin.1
 %__cp extras/bespin-compl %{buildroot}/%{_sysconfdir}/bash_completion.d
 
 # Installing necessary files for kdm bespin theme
-%__mkdir -p %{buildroot}/%_kde_datadir/apps/kdm/themes/bespin
-cp -rf kdm/* %{buildroot}/%_kde_datadir/apps/kdm/themes/bespin
+%__mkdir -p %{buildroot}/%_kde_datadir/apps/kdm/themes/Bespin
+cp -rf kdm/* %{buildroot}/%_kde_datadir/apps/kdm/themes/Bespin
+%__bzip2 -dc %{SOURCE1} > %{buildroot}/%_kde_datadir/apps/kdm/themes/Bespin/screenshot.png
 
 # Installing necessary files for ksplash bespin theme
-%__mkdir -p %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin
+%__mkdir -p %{buildroot}/%_kde_datadir/apps/ksplash/Themes/Bespin
 cd ksplash
-#./generate.sh 640 400
-#./generate.sh 800 600
-#./generate.sh 1024 768
-#./generate.sh 1280 1024
+./generate.sh 600 400
+./generate.sh 800 600
+./generate.sh 1024 768
+./generate.sh 1280 1024
 ./generate.sh 1600 1200
-#./generate.sh 1920 1200
-%__cp -rf . %{buildroot}/%_kde_datadir/apps/ksplash/Themes/bespin/
+./generate.sh 1680 1050
+./generate.sh 1920 1200
+%__bzip2 -dc %{SOURCE2} > %{buildroot}/%_kde_datadir/apps/ksplash/Themes/Bespin/Preview.png
+%__cp -rf . %{buildroot}/%_kde_datadir/apps/ksplash/Themes/Bespin/
 cd ..
+
 # Creating the icons package
 cd icons
 ./generate_kde_icons.sh
 %__mkdir -p %{buildroot}/%_kde_datadir/icons/
-%__mv bespin %{buildroot}/%_kde_datadir/icons/
+%__mv Bespin %{buildroot}/%_kde_datadir/icons/
 cd ..
 
 %clean 
