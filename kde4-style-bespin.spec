@@ -10,12 +10,12 @@
 Name:		kde4-style-bespin
 Summary:	Bespin is a native style for QT/ KDE4
 Version:	0.1
-Release:	%mkrel 0.%{svn}svn.2
+Release:	%mkrel 0.%{svn}svn.3
 Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
 # Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
 # since we're providing the necessary data directly in the script
 Source1:	screenshot.png.bz2
-Source2:        Preview.png.bz2
+Source2:	Preview.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
 Patch1:		bespin-svn-mdv-fix-ksplash-themerc.patch
 Patch2:		bespin-svn-mdv-fix-ksplash-generate-script.patch
@@ -32,7 +32,7 @@ Obsoletes:	kde4-theme-bespin
 Suggests:	kde4-style-bespin-ksplash
 Suggests:	kde4-style-bespin-kdm
 Suggests:	kde4-style-bespin-icons
-Suggests:       plasma-applet-xbar
+Suggests:	plasma-applet-xbar
 
 %description
 Bespin is a native style for QT/ KDE4
