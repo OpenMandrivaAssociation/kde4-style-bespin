@@ -1,16 +1,16 @@
 # Download information:
 # svn co https://cloudcity.svn.sourceforge.net/svnroot/cloudcity
 # cd cloudcity && find . -name .svn |xargs rm -rf && cd ..
-# tar -caf cloudcity-0.1.1043svn.tar.lzma cloudcity
+# tar -caf cloudcity-0.1.1068svn.tar.lzma cloudcity
 
 
-%define svn	1043
+%define svn	1068
 %define srcname	cloudcity
-
+%define enable_translucient 1
 Name:		kde4-style-bespin
 Summary:	Bespin is a native style for QT/ KDE4
 Version:	0.1
-Release:	%mkrel 0.%{svn}svn.3
+Release:	%mkrel 0.%{svn}svn.1
 Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
 # Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
 # since we're providing the necessary data directly in the script
@@ -18,7 +18,6 @@ Source1:	screenshot.png.bz2
 Source2:	Preview.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
 Patch1:		bespin-svn-mdv-fix-ksplash-themerc.patch
-Patch2:		bespin-svn-mdv-fix-ksplash-generate-script.patch
 URL:		http://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
 License:	LGPLv2
@@ -129,9 +128,15 @@ This package provide a Bespin icons theme
 %setup -q -n %{srcname}
 %patch0 -p 0
 %patch1 -p 0
-%patch2 -p 0
+
+
 %build
-%cmake_kde4 
+%if %{enable_translucient}
+ %cmake_kde4 -DENABLE_ARGB=on
+%else 
+ %cmake_kde4
+%endif 
+
 %make
 
 %install
