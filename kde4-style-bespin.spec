@@ -4,7 +4,7 @@
 # tar -caf cloudcity-0.1.1068svn.tar.lzma cloudcity
 
 
-%define svn	1068
+%define svn	1076
 %define srcname	cloudcity
 %define enable_translucient 1
 Name:		kde4-style-bespin
@@ -15,7 +15,6 @@ Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
 # Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
 # since we're providing the necessary data directly in the script
 Source1:	screenshot.png.bz2
-Source2:	Preview.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
 Patch1:		bespin-svn-mdv-fix-ksplash-themerc.patch
 URL:		http://cloudcity.sourceforge.net/
@@ -26,6 +25,7 @@ BuildRequires:	kdebase4-workspace-devel
 BuildRequires:	imagemagick
 # need to generate the icons pack
 BuildRequires:	inkscape
+BuildRequires:	bash
 Obsoletes:	kde4-kwin-style-bespin < %version-%release
 Obsoletes:	kde4-theme-bespin
 Suggests:	kde4-style-bespin-ksplash
@@ -165,13 +165,12 @@ cd ksplash
 ./generate.sh 1600 1200
 ./generate.sh 1680 1050
 ./generate.sh 1920 1200
-%__bzip2 -dc %{SOURCE2} > %{buildroot}/%_kde_datadir/apps/ksplash/Themes/Bespin/Preview.png
 %__cp -rf . %{buildroot}/%_kde_datadir/apps/ksplash/Themes/Bespin/
 cd ..
 
 # Creating the icons package
 cd icons
-./generate_kde_icons.sh
+bash ./generate_kde_icons.sh
 %__mkdir -p %{buildroot}/%_kde_datadir/icons/
 %__mv Bespin %{buildroot}/%_kde_datadir/icons/
 cd ..
