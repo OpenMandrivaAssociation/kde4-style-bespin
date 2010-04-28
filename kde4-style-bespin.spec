@@ -4,7 +4,7 @@
 # tar -caf cloudcity-0.1.1068svn.tar.lzma cloudcity
 
 
-%define svn	1076
+%define svn	1085
 %define srcname	cloudcity
 %define enable_translucient 1
 Name:		kde4-style-bespin
@@ -16,7 +16,6 @@ Source0:	%{srcname}-%{version}.%{svn}svn.tar.lzma
 # since we're providing the necessary data directly in the script
 Source1:	screenshot.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
-Patch1:		bespin-svn-mdv-fix-ksplash-themerc.patch
 URL:		http://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
 License:	LGPLv2
@@ -127,7 +126,6 @@ This package provide a Bespin icons theme
 %prep
 %setup -q -n %{srcname}
 %patch0 -p 0
-%patch1 -p 0
 
 
 %build
