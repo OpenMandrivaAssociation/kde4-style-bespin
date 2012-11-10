@@ -1,0 +1,31 @@
+Index: icons/generate_kde_icons.sh
+===================================================================
+--- icons/generate_kde_icons.sh
++++ icons/generate_kde_icons.sh	2010-12-08 13:35:03.274915795 -0300
+@@ -14,7 +14,7 @@
+ #fi
+ ## CONFIG ##########################################################################################
+ 
+-basename="nmfnms"
++basename="Bespin"
+ alpha=100
+ halo="white"
+ 
+@@ -33,7 +33,7 @@
+ # The alpha level of the final icon in percent [0-100]
+ #alpha=77
+ 
+-source ./config
++#source ./config
+ 
+ ###### ICON THEME MANAGEMENT #######################################################################
+ 
+@@ -155,7 +155,7 @@
+ echo "
+ [Icon Theme]
+ Name=$setname
+-Comment=question everything!
++Comment=Bespin Icon Theme
+ DisplayDepth=32
+ Inherits=oxygen
+ 

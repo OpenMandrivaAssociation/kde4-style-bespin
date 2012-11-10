@@ -1,0 +1,30 @@
+Index: ksplash/generate.sh
+===================================================================
+--- ksplash/generate.sh
++++ ksplash/generate.sh	2011-05-03 15:26:11.073904109 -0300
+@@ -23,8 +23,9 @@
+     rm -f ".tmp.png" ".tmp2.png"
+ fi
+ 
+-echo "SCALE OFF
++echo "SCALE ON
+ BACKGROUND_IMAGE 0 0 background.png
++SCALE OFF
+ 
+ ANIM 1 $X $Y 10 ../init.png 80 1
+ WAIT_STATE kded
+Index: ksplash/tibanna/generate.sh
+===================================================================
+--- ksplash/tibanna/generate.sh
++++ ksplash/tibanna/generate.sh	2011-05-03 15:42:48.766904442 -0300
+@@ -44,8 +44,9 @@
+     convert -crop 1600x1200+160+0 -scale 400x300! -filter lanczos ../../kdm/tibanna/background.jpg Preview.png
+ fi
+ 
+-echo "SCALE OFF
++echo "SCALE ON
+ BACKGROUND_IMAGE 0 0 background.png
++SCALE OFF
+ 
+ ANIM 1 0 $Y 7 flash.png 80
+ WAIT_STATE kded
