@@ -19,7 +19,7 @@ Source0:	%{srcname}-%{version}.%{svn}svn.tar.xz
 Source1:	screenshot.png.bz2
 Patch0:		bespin-svn-mdv-fix-icon-and-comment-in-kde-icons-scripts.patch
 Patch1:		bespin-svn-mga-use-scale-for-background-in-ksplash-generation.patch
-URL:		http://cloudcity.sourceforge.net/
+URL:		https://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
 License:	LGPLv2
 BuildRequires:	kdebase4-workspace-devel
