@@ -22,6 +22,7 @@ Patch1:		bespin-svn-mga-use-scale-for-background-in-ksplash-generation.patch
 URL:		https://cloudcity.sourceforge.net/
 Group:		Graphical desktop/KDE
 License:	LGPLv2
+BuildRequires:	make
 BuildRequires:	kdebase4-workspace-devel
 # needed to generate the ksplash
 BuildRequires:	imagemagick
