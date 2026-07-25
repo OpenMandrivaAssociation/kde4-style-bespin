@@ -12,7 +12,7 @@
 Name:		kde4-style-bespin
 Summary:	Bespin is a native style for QT/ KDE4
 Version:	0.1
-Release:	%mkrel 0.%{svn}svn.1
+Release:	0.%{svn}svn.2
 Source0:	%{srcname}-%{version}.%{svn}svn.tar.xz
 # Patch0 is here to fix the default comment in icon theme & finally avoid to source the config file
 # since we're providing the necessary data directly in the script
